@@ -1,0 +1,247 @@
+/*
+ * ER/Studio 8.0 SQL Code Generation
+ * Company : romina
+ * Project : ModeloBootcamp.DM1
+ * Author : romina
+ *
+ * Date Created : Friday, December 09, 2022 08:55:08
+ * Target DBMS : Microsoft SQL Server 2008
+ */
+CREATE TYPE Name FROM nvarchar(50) NULL
+go
+/* 
+ * TABLE: categoria_proveedor 
+ */
+CREATE TABLE categoria_proveedor(
+ id int IDENTITY(1,1),
+ tipo_categoria varchar(50) NOT NULL,
+ proveedorID int NOT NULL,
+ productoID int NOT NULL,
+ CONSTRAINT PK12 PRIMARY KEY NONCLUSTERED (id)
+)
+go
+IF OBJECT_ID('categoria_proveedor') IS NOT NULL
+ PRINT '<<< CREATED TABLE categoria_proveedor >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE categoria_proveedor >>>'
+go
+/* 
+ * TABLE: Clientes 
+ */
+CREATE TABLE Clientes(
+ clientes_ID int IDENTITY(1,1),
+ nombre_clie varchar(50) NULL,
+ apellido_clie varchar(50) NULL,
+ cuit_dni int NULL,
+ razonsocial_clie varchar(50) NULL,
+ tipo_cliente varchar(50) NOT NULL,
+ id_usuario int NOT NULL,
+ CONSTRAINT PK3 PRIMARY KEY NONCLUSTERED (clientes_ID)
+)
+go
+IF OBJECT_ID('Clientes') IS NOT NULL
+ PRINT '<<< CREATED TABLE Clientes >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE Clientes >>>'
+go
+/* 
+ * TABLE: detalle_orden 
+ */
+CREATE TABLE detalle_orden(
+ ID int IDENTITY(1,1),
+ ordenID int NOT NULL,
+ productoID int NOT NULL,
+ cantidad int NOT NULL,
+ precio decimal(10, 2) NOT NULL,
+ CONSTRAINT PK8 PRIMARY KEY NONCLUSTERED (ID)
+)
+go
+IF OBJECT_ID('detalle_orden') IS NOT NULL
+ PRINT '<<< CREATED TABLE detalle_orden >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE detalle_orden >>>'
+go
+/* 
+ * TABLE: Empleados 
+ */
+CREATE TABLE Empleados(
+ empleadosID int IDENTITY(1,1),
+ nombre_emp varchar(50) NULL,
+ apellido_emp varchar(50) NULL,
+ rol_area varchar(50) NOT NULL,
+ id_usuario int NOT NULL,
+ CONSTRAINT PK4 PRIMARY KEY NONCLUSTERED (empleadosID)
+)
+go
+IF OBJECT_ID('Empleados') IS NOT NULL
+ PRINT '<<< CREATED TABLE Empleados >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE Empleados >>>'
+go
+/* 
+ * TABLE: Orden 
+ */
+CREATE TABLE Orden(
+ ordenID int IDENTITY(1,1),
+ productoID int NOT NULL,
+ clientes_ID int NOT NULL,
+ fecha_generacion datetime NOT NULL,
+ fecha_entrega datetime NOT NULL,
+ empleadosID int NOT NULL,
+ CONSTRAINT PK6 PRIMARY KEY NONCLUSTERED (ordenID)
+)
+go
+IF OBJECT_ID('Orden') IS NOT NULL
+ PRINT '<<< CREATED TABLE Orden >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE Orden >>>'
+go
+/* 
+ * TABLE: Producto 
+ */
+CREATE TABLE Producto(
+ productoID int IDENTITY(1,1),
+ proveedorID int NOT NULL,
+ nom_producto varchar(100) NOT NULL,
+ precio decimal(10, 2) NOT NULL,
+ stock int NOT NULL,
+ CONSTRAINT PK7 PRIMARY KEY NONCLUSTERED (productoID)
+)
+go
+IF OBJECT_ID('Producto') IS NOT NULL
+ PRINT '<<< CREATED TABLE Producto >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE Producto >>>'
+go
+/* 
+ * TABLE: Promocion 
+ */
+CREATE TABLE Promocion(
+ promocionID int IDENTITY(1,1),
+ descuento decimal(10, 2) NOT NULL,
+ nom_promo varchar(100) NOT NULL,
+ CONSTRAINT PK9 PRIMARY KEY NONCLUSTERED (promocionID)
+)
+go
+IF OBJECT_ID('Promocion') IS NOT NULL
+ PRINT '<<< CREATED TABLE Promocion >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE Promocion >>>'
+go
+/* 
+ * TABLE: promociones_producto 
+ */
+CREATE TABLE promociones_producto(
+ productoID int NOT NULL,
+ promocionID int NOT NULL,
+ fecha_inicio datetime NOT NULL,
+ fecha_fin datetime NOT NULL,
+ CONSTRAINT PK13 PRIMARY KEY NONCLUSTERED (productoID, promocionID, fecha_inicio, fecha_fin)
+)
+go
+IF OBJECT_ID('promociones_producto') IS NOT NULL
+ PRINT '<<< CREATED TABLE promociones_producto >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE promociones_producto >>>'
+go
+/* 
+ * TABLE: Proveedor 
+ */
+CREATE TABLE Proveedor(
+ proveedorID int IDENTITY(1,1),
+ nombre_prov varchar(50) NULL,
+ direccion varchar(200) NOT NULL,
+ cuit int NULL,
+ categoria varchar(100) NOT NULL,
+ CONSTRAINT PK5 PRIMARY KEY NONCLUSTERED (proveedorID)
+)
+go
+IF OBJECT_ID('Proveedor') IS NOT NULL
+ PRINT '<<< CREATED TABLE Proveedor >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE Proveedor >>>'
+go
+/* 
+ * TABLE: Usuarios 
+ */
+CREATE TABLE Usuarios(
+ id_usuario int IDENTITY(1,1),
+ email varchar(50) NOT NULL,
+ contraseña varchar(10) NOT NULL,
+ CONSTRAINT PK10 PRIMARY KEY NONCLUSTERED (id_usuario)
+)
+go
+IF OBJECT_ID('Usuarios') IS NOT NULL
+ PRINT '<<< CREATED TABLE Usuarios >>>'
+ELSE
+ PRINT '<<< FAILED CREATING TABLE Usuarios >>>'
+go
+/* 
+ * TABLE: categoria_proveedor 
+ */
+ALTER TABLE categoria_proveedor ADD CONSTRAINT RefProveedor22 
+ FOREIGN KEY (proveedorID)
+ REFERENCES Proveedor(proveedorID)
+go
+ALTER TABLE categoria_proveedor ADD CONSTRAINT RefProducto23 
+ FOREIGN KEY (productoID)
+ REFERENCES Producto(productoID)
+go
+/* 
+ * TABLE: Clientes 
+ */
+ALTER TABLE Clientes ADD CONSTRAINT RefUsuarios28 
+ FOREIGN KEY (id_usuario)
+ REFERENCES Usuarios(id_usuario)
+go
+/* 
+ * TABLE: detalle_orden 
+ */
+ALTER TABLE detalle_orden ADD CONSTRAINT RefOrden14 
+ FOREIGN KEY (ordenID)
+ REFERENCES Orden(ordenID)
+go
+ALTER TABLE detalle_orden ADD CONSTRAINT RefProducto17 
+ FOREIGN KEY (productoID)
+ REFERENCES Producto(productoID)
+go
+/* 
+ * TABLE: Empleados 
+ */
+ALTER TABLE Empleados ADD CONSTRAINT RefUsuarios19 
+ FOREIGN KEY (id_usuario)
+ REFERENCES Usuarios(id_usuario)
+go
+/* 
+ * TABLE: Orden 
+ */
+ALTER TABLE Orden ADD CONSTRAINT RefProducto13 
+ FOREIGN KEY (productoID)
+ REFERENCES Producto(productoID)
+go
+ALTER TABLE Orden ADD CONSTRAINT RefClientes18 
+ FOREIGN KEY (clientes_ID)
+ REFERENCES Clientes(clientes_ID)
+go
+ALTER TABLE Orden ADD CONSTRAINT RefEmpleados29 
+ FOREIGN KEY (empleadosID)
+ REFERENCES Empleados(empleadosID)
+go
+/* 
+ * TABLE: Producto 
+ */
+ALTER TABLE Producto ADD CONSTRAINT RefProveedor12 
+ FOREIGN KEY (proveedorID)
+ REFERENCES Proveedor(proveedorID)
+go
+/* 
+ * TABLE: promociones_producto 
+ */
+ALTER TABLE promociones_producto ADD CONSTRAINT RefProducto25 
+ FOREIGN KEY (productoID)
+ REFERENCES Producto(productoID)
+go
+ALTER TABLE promociones_producto ADD CONSTRAINT RefPromocion26 
+ FOREIGN KEY (promocionID)
+ REFERENCES Promocion(promocionID)
+go
