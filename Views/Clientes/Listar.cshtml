@@ -1,0 +1,71 @@
+﻿@model IEnumerable<CRUD1.Models.ModelClientes>
+
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h1>Lista de Clientes</h1>
+
+<p>
+    <a asp-action="Crear">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.clientes_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre_clie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellido_clie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cuit_dni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.razonsocial_clie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipo_cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_usuario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.clientes_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_clie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellido_clie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cuit_dni)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.razonsocial_clie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo_cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_usuario)
+            </td>
+            <td>
+
+                @Html.ActionLink("Editar", "Editar", new { id=item.clientes_ID }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { id=item.clientes_ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

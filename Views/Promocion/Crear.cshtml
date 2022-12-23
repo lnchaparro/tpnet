@@ -1,0 +1,36 @@
+﻿@model CRUD1.Models.ModelPromocion
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear Promocion</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Crear" asp-controller="Promocion" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="descuento" class="control-label"></label>
+                <input asp-for="descuento" class="form-control" />
+                <span asp-validation-for="descuento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nom_promo" class="control-label"></label>
+                <input asp-for="nom_promo" class="form-control" />
+                <span asp-validation-for="nom_promo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Listar">Volver al listado</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

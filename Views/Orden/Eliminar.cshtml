@@ -1,0 +1,56 @@
+﻿@model CRUD1.Models.ModelOrden
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h1>Eliminar Orden</h1>
+<h3>Desea eliminar la orden y todos sus datos?</h3>
+<div>
+    <h4>ModelOrden</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ordenID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ordenID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.productoID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.productoID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.clientes_ID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.clientes_ID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.fecha_generacion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fecha_generacion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.fecha_entrega)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fecha_entrega)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.empleadosID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.empleadosID)
+        </dd>
+    </dl>
+    
+    <form asp-action="Eliminar" asp-controller="Orden" method="post">
+        <input asp-for="ordenID" type="hidden" class="form-control" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Listar">Volver al listado</a>
+    </form>
+</div>

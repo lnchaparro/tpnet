@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CRUD1.Models.ModelOrden>
+
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h1>Ordenes</h1>
+
+<p>
+    <a asp-action="Crear">Crear Nueva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ordenID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productoID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.clientes_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_generacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_entrega)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.empleadosID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ordenID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.clientes_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_generacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_entrega)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.empleadosID)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id=item.ordenID }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { id=item.ordenID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

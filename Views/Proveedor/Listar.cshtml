@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CRUD1.Models.ModelProveedor>
+
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h1>Proveedores</h1>
+
+<p>
+    <a asp-action="Crear">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.proveedorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre_prov)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cuit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.categoria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.proveedorID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_prov)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cuit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.categoria)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id=item.proveedorID }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { id=item.proveedorID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

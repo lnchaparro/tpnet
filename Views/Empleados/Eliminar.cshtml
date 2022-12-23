@@ -1,0 +1,50 @@
+﻿@model CRUD1.Models.ModelEmpleados
+
+@{
+    ViewData["Title"] = "Eliminar Empleado";
+}
+
+<h1>Eliminar</h1>
+
+<h3>Desea eliminar al empleado y todos sus datos?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.empleadosID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.empleadosID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nombre_emp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nombre_emp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.apellido_emp)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.apellido_emp)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.rol_area)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.rol_area)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id_usuario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id_usuario)
+        </dd>
+    </dl>
+    
+    <form asp-action="Eliminar" asp-controller="Empleados" method="post">
+        <input asp-for="empleadosID" type="hidden" class="form-control" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Listar">Volver al listado</a>
+    </form>
+</div>

@@ -1,0 +1,46 @@
+﻿@model CRUD1.Models.ModelProveedor
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear Proveedor</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Crear" asp-controller="Proveedor" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nombre_prov" class="control-label"></label>
+                <input asp-for="nombre_prov" class="form-control" />
+                <span asp-validation-for="nombre_prov" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="direccion" class="control-label"></label>
+                <input asp-for="direccion" class="form-control" />
+                <span asp-validation-for="direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cuit" class="control-label"></label>
+                <input asp-for="cuit" class="form-control" />
+                <span asp-validation-for="cuit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="categoria" class="control-label"></label>
+                <input asp-for="categoria" class="form-control" />
+                <span asp-validation-for="categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Listar">Volver al listado</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

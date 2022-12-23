@@ -1,0 +1,49 @@
+﻿@model CRUD1.Models.ModelProveedor
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h1>Eliminar</h1>
+<h3>Desea eliminar al proveedor y todos sus datos?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.proveedorID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.proveedorID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nombre_prov)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nombre_prov)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.direccion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cuit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cuit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.categoria)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.categoria)
+        </dd>
+    </dl>
+    
+    <form asp-action="Eliminar" asp-controller="Proveedor" method="post">
+        <input asp-for="proveedorID" type="hidden" class="form-control" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Listar">Volver al listado</a>
+    </form>
+</div>
