@@ -1,0 +1,462 @@
+CREATE OR ALTER PROCEDURE ListarClientes
+AS
+BEGIN
+	SELECT * FROM Clientes
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE CrearCliente (
+	@clientes_ID int,
+	@nombre_clie varchar(50),
+	@apellido_clie varchar(50),
+	@cuit_dni int,
+	@razonsocial_clie varchar(50),
+	@tipo_cliente varchar(50),
+	@id_usuario int
+)
+AS
+BEGIN
+	INSERT INTO Clientes(clientes_ID, nombre_clie, apellido_clie, cuit_dni, razonsocial_clie, tipo_cliente, id_usuario) VALUES (@clientes_ID, @nombre_clie, @apellido_clie, @cuit_dni, @razonsocial_clie, @tipo_cliente, @id_usuario)
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE Eliminar (
+	@clientes_ID int
+)
+AS
+BEGIN
+	DELETE FROM Clientes WHERE clientes_ID = @clientes_ID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE Editar (
+	@clientes_ID int,
+	@nombre_clie varchar(50),
+	@apellido_clie varchar(50),
+	@cuit_dni int,
+	@razonsocial_clie varchar(50),
+	@tipo_cliente varchar(50),
+	@id_usuario int
+)
+AS
+BEGIN
+	UPDATE Clientes SET
+		nombre_clie = @nombre_clie,
+		apellido_clie = @apellido_clie,
+		cuit_dni = @cuit_dni,
+		razonsocial_clie = @razonsocial_clie,
+		tipo_cliente = @tipo_cliente,
+		id_usuario = @id_usuario
+	WHERE
+		clientes_ID = @clientes_ID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE ObtenerCliente (
+	@clientes_ID int
+)
+AS
+BEGIN
+	SELECT * FROM Clientes WHERE clientes_ID = @clientes_ID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE ListarUsuarios
+AS
+BEGIN
+	SELECT * FROM Usuarios
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE CrearUsuario (
+	@email varchar(50),
+	@contraseña varchar(10),
+	@id_perfil int
+)
+AS
+BEGIN
+	INSERT INTO Usuarios(email, contraseña, id_perfil) VALUES (@email, @contraseña, @id_perfil)
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE ObtenerUsuario (
+	@id_usuario int
+)
+AS
+BEGIN
+	SELECT * FROM Usuarios WHERE id_usuario = @id_usuario
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EditarUsuario (
+	@id_usuario int,
+	@email varchar(50),
+	@contraseña varchar(10)
+)
+AS
+BEGIN
+	UPDATE Usuarios SET
+		email = @email,
+		contraseña = @contraseña
+	WHERE
+		id_usuario = @id_usuario
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EliminarUsuario (
+	@id_usuario int
+)
+AS
+BEGIN
+	DELETE FROM Usuarios WHERE id_usuario = @id_usuario
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE ListarEmpleados
+AS
+BEGIN
+	SELECT * FROM Empleados
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE CrearEmpleado (
+	@nombre_emp varchar(50),
+	@apellido_emp varchar(10),
+	@rol_area varchar(50),
+	@id_usuario int
+)
+AS
+BEGIN
+	INSERT INTO Empleados(nombre_emp, apellido_emp, rol_area, id_usuario) VALUES (@nombre_emp, @apellido_emp, @rol_area, @id_usuario)
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE ObtenerEmpleado (
+	@empleadosID int
+)
+AS
+BEGIN
+	SELECT * FROM Empleados WHERE empleadosID = @empleadosID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EditarEmpleado (
+	@empleadosID int,
+	@nombre_emp varchar(50),
+	@apellido_emp varchar(10),
+	@rol_area varchar(50),
+	@id_usuario int
+)
+AS
+BEGIN
+	UPDATE Empleados SET
+		nombre_emp = @nombre_emp,
+		apellido_emp = @apellido_emp,
+		rol_area = @rol_area,
+		id_usuario = @id_usuario
+	WHERE
+		empleadosID = @empleadosID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EliminarEmpleado (
+	@empleadosID int
+)
+AS
+BEGIN
+	DELETE FROM Empleados WHERE empleadosID = @empleadosID
+END;
+
+go
+
+
+
+
+
+
+
+
+
+CREATE OR ALTER PROCEDURE ListarProducto
+AS
+BEGIN
+	SELECT * FROM Producto
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE CrearProducto (
+	@proveedorID int,
+	@nom_producto varchar(100),
+	@precio decimal(10, 2),
+	@stock int
+)
+AS
+BEGIN
+	INSERT INTO Producto(proveedorID, nom_producto, precio, stock) VALUES (@proveedorID, @nom_producto, @precio, @stock)
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE ObtenerProducto (
+	@productoID int
+)
+AS
+BEGIN
+	SELECT * FROM Producto WHERE productoID = @productoID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EditarProducto (
+	@productoID int,
+	@proveedorID int,
+	@nom_producto varchar(100),
+	@precio decimal(10, 2),
+	@stock int
+)
+AS
+BEGIN
+	UPDATE Producto SET
+		proveedorID = @proveedorID,
+		nom_producto = @nom_producto,
+		precio = @precio,
+		stock = stock
+	WHERE
+		productoID = @productoID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EliminarProducto (
+	@productoID int
+)
+AS
+BEGIN
+	DELETE FROM Producto WHERE productoID = @productoID
+END;
+
+go
+
+
+
+
+
+
+CREATE OR ALTER PROCEDURE ListarOrden
+AS
+BEGIN
+	SELECT * FROM Orden
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE CrearOrden (
+	@productoID int,
+	@clientes_ID int,
+	@fecha_generacion datetime,
+	@fecha_entrega datetime,
+	@empleadosID int
+)
+AS
+BEGIN
+	INSERT INTO Orden(productoID, clientes_ID, fecha_generacion, fecha_entrega, empleadosID) VALUES (@productoID, @clientes_ID, @fecha_generacion, @fecha_entrega, @empleadosID)
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE ObtenerOrden (
+	@ordenID int
+)
+AS
+BEGIN
+	SELECT * FROM Orden WHERE ordenID = @ordenID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EditarOrden (
+	@ordenID int,
+	@productoID int,
+	@clientes_ID int,
+	@fecha_generacion datetime,
+	@fecha_entrega datetime,
+	@empleadosID int
+)
+AS
+BEGIN
+	UPDATE Orden SET
+		productoID = @productoID,
+		clientes_ID = @clientes_ID,
+		fecha_generacion = @fecha_generacion,
+		fecha_entrega = @fecha_entrega,
+		empleadosID = @empleadosID
+	WHERE
+		ordenID = @ordenID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EliminarOrden (
+	@ordenID int
+)
+AS
+BEGIN
+	DELETE FROM Orden WHERE ordenID = @ordenID
+END;
+
+
+go
+
+
+
+
+
+
+
+
+CREATE OR ALTER PROCEDURE ListarPromocion
+AS
+BEGIN
+	SELECT * FROM Promocion
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE CrearPromocion (
+	@descuento decimal(10, 2),
+	@nom_promo varchar(100)
+)
+AS
+BEGIN
+	INSERT INTO Promocion(descuento, nom_promo) VALUES (@descuento, @nom_promo)
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE ObtenerPromocion (
+	@promocionID int
+)
+AS
+BEGIN
+	SELECT * FROM Promocion WHERE promocionID = @promocionID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EditarPromocion (
+	@promocionID int,
+	@descuento decimal(10, 2),
+	@nom_promo varchar(100)
+)
+AS
+BEGIN
+	UPDATE Promocion SET
+		descuento = @descuento,
+		nom_promo = @nom_promo
+	WHERE
+		promocionID = @promocionID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EliminarPromocion (
+	@promocionID int
+)
+AS
+BEGIN
+	DELETE FROM Promocion WHERE promocionID = @promocionID
+END;
+
+
+go
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE OR ALTER PROCEDURE ListarPromocionesProducto
+AS
+BEGIN
+	SELECT * FROM promociones_producto
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE CrearPromocionesProducto (
+	@productoID int,
+	@promocionID int,
+	@fecha_inicio datetime,
+	@fecha_fin datetime
+)
+AS
+BEGIN
+	INSERT INTO promociones_producto(productoID, promocionID, fecha_inicio, fecha_fin) VALUES (@productoID, @promocionID, @fecha_inicio, @fecha_fin)
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE ObtenerPromocionesProducto (
+	@productoID int
+)
+AS
+BEGIN
+	SELECT * FROM promociones_producto WHERE productoID = @productoID
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EditarPromocionesProducto (
+	@productoID int,
+	@promocionID int,
+	@fecha_inicio datetime,
+	@fecha_fin datetime
+)
+AS
+BEGIN
+	UPDATE promociones_producto SET
+		fecha_inicio = @fecha_inicio,
+		fecha_fin = @fecha_fin
+	WHERE
+		(productoID = @productoID AND promocionID = @promocionID)
+END;
+
+go
+
+CREATE OR ALTER PROCEDURE EliminarPromocionesProducto (
+	@productoID int,
+	@promocionID int
+)
+AS
+BEGIN
+	DELETE FROM promociones_producto WHERE (productoID = @productoID AND promocionID = @promocionID)
+END;
+
+
+go
+
+
+
+
+
