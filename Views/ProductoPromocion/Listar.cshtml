@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CRUD1.Models.ModelProductoPromocion>
+
+@{
+    ViewData["Title"] = "Listar";
+}
+
+<h1>Productos en Promocion</h1>
+<p>
+    <a asp-action="Crear">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.productoID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.promocionID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_inicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_fin)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.promocionID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_inicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_fin)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { producto_id=item.productoID, promocion_id=item.promocionID }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { producto_id=item.productoID, promocion_id=item.promocionID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,71 +1,62 @@
 ﻿@model IEnumerable<CRUD1.Models.ModelClientes>
 
-@{
+    @{
     ViewData["Title"] = "Listar";
-}
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-<h1>Lista de Clientes</h1>
+    <div class="card">
+    <div class="card-header">
+        Listar Clientes
+    </div>
 
-<p>
-    <a asp-action="Crear">Crear Nuevo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.clientes_ID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre_clie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.apellido_clie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cuit_dni)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.razonsocial_clie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tipo_cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.id_usuario)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.clientes_ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre_clie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.apellido_clie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cuit_dni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.razonsocial_clie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tipo_cliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.id_usuario)
-            </td>
-            <td>
-
-                @Html.ActionLink("Editar", "Editar", new { id=item.clientes_ID }) |
-                @Html.ActionLink("Eliminar", "Eliminar", new { id=item.clientes_ID })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="card-body"></div>
+             <a asp-action="Crear" asp-controller="Clientes" class="btn btn-success">Crear Nuevo</a>
+                <hr />
+                 <table class="table table-info table-striped">
+                     <thead>
+                        <tr>
+                           <th scope="col">ID </th>
+                           <th scope="col">Nombre</th>
+                           <th scope="col">Apellido</th>
+                           <th scope="col">Cuit/Dni</th>
+                           <th scope="col">Razon social</th>
+                           <th scope="col">Tipo cliente</th>
+                           <th scope="col">ID Usuario</th>
+                           <th scope="col">Accion</th>
+                        </tr>
+                     </thead>
+                    <tbody>
+                 <tbody>
+                     @foreach (var item in Model) {
+                     <tr>
+                          <td>
+                             @item.clientes_ID
+                          </td>
+                          <td>
+                            @item.nombre_clie
+                          </td>
+                          <td>
+                            @item.apellido_clie
+                          </td>
+                          <td>
+                            @item.cuit_dni
+                          </td>
+                          <td>
+                            @item.razonsocial_clie
+                          </td>
+                          <td>
+                             @item.tipo_cliente
+                          </td>
+                          <td>
+                             @item.id_usuario
+                          </td>
+                           <td>
+                                <a asp-action="Editar" asp-controller="Cliente" class="btn btn-success" asp-route-id="@item.clientes_ID">Editar</a>
+                    <a asp-action="Eliminar" asp-controller="Cliente" class="btn btn-danger" asp-route-id="@item.clientes_ID">Eliminar</a>
+                           </td>
+                     </tr>
+}                 
+                     </tbody>
+                 </table>
+              

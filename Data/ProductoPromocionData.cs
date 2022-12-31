@@ -1,36 +1,35 @@
 ﻿using CRUD1.Models;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace CRUD1.Data
 {
-    public class ProductoData
+    public class ProductoPromocionData
     {
 
-        public List<ModelProducto> Listar()
+        public List<ModelProductoPromocion> Listar()
         {
-            var result = new List<ModelProducto>();
+            var result = new List<ModelProductoPromocion>();
             var connection = new Connection();
 
             using (var SQLConnection = new SqlConnection(connection.GetSQLInfo()))
             {
                 SQLConnection.Open();
 
-                SqlCommand command = new SqlCommand("ListarProducto", SQLConnection);
+                SqlCommand command = new SqlCommand("ListarPromocionesProducto", SQLConnection);
                 command.CommandType = CommandType.StoredProcedure;
 
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        result.Add(new ModelProducto()
+                        result.Add(new ModelProductoPromocion()
                         {
                             productoID = Convert.ToInt32(reader["productoID"]),
-                            proveedorID = Convert.ToInt32(reader["proveedorID"]),
-                            nom_producto = reader["nom_producto"].ToString(),
-                            precio = Convert.ToDecimal(reader["precio"]),
-                            stock = Convert.ToInt32(reader["stock"]),
-                            link_imagen = reader["link_imagen"].ToString()
+                            promocionID = Convert.ToInt32(reader["promocionID"]),
+                            fecha_inicio = Convert.ToDateTime(reader["fecha_inicio"]),
+                            fecha_fin = Convert.ToDateTime(reader["fecha_fin"]),
                         });
                     }
                 }
@@ -39,17 +38,18 @@ namespace CRUD1.Data
             return result;
         }
 
-        public ModelProducto Obtener(int id)
+        public ModelProductoPromocion Obtener(int producto_id, int promocion_id)
         {
-            var oProducto = new ModelProducto();
+            var oProducto = new ModelProductoPromocion();
             var cn = new Connection();
 
             using (var SQLConnection = new SqlConnection(cn.GetSQLInfo()))
             {
                 SQLConnection.Open();
 
-                SqlCommand command = new SqlCommand("ObtenerProducto", SQLConnection);
-                command.Parameters.AddWithValue("ProductoID", id);
+                SqlCommand command = new SqlCommand("ObtenerPromocionesProducto", SQLConnection);
+                command.Parameters.AddWithValue("productoID", producto_id);
+                command.Parameters.AddWithValue("promocionID", promocion_id);
                 command.CommandType = CommandType.StoredProcedure;
 
                 using (var reader = command.ExecuteReader())
@@ -57,18 +57,16 @@ namespace CRUD1.Data
                     while (reader.Read())
                     {
                         oProducto.productoID = Convert.ToInt32(reader["productoID"]);
-                        oProducto.proveedorID = Convert.ToInt32(reader["proveedorID"]);
-                        oProducto.nom_producto = reader["nom_producto"].ToString();
-                        oProducto.precio = Convert.ToDecimal(reader["precio"]);
-                        oProducto.stock = Convert.ToInt32(reader["stock"]);
-                        oProducto.link_imagen = reader["link_imagen"].ToString();
+                        oProducto.promocionID = Convert.ToInt32(reader["promocionID"]);
+                        oProducto.fecha_inicio = Convert.ToDateTime(reader["fecha_inicio"]);
+                        oProducto.fecha_fin = Convert.ToDateTime(reader["fecha_fin"]);
                     }
                 }
             }
             return oProducto;
         }
 
-        public bool Crear(ModelProducto oProducto)
+        public bool Crear(ModelProductoPromocion oProductoPromocion)
         {
             bool result;
 
@@ -78,12 +76,11 @@ namespace CRUD1.Data
                 using (var connection = new SqlConnection(cn.GetSQLInfo()))
                 {
                     connection.Open();
-                    SqlCommand cmd = new SqlCommand("CrearProducto", connection);
-                    cmd.Parameters.AddWithValue("proveedorID", oProducto.proveedorID);
-                    cmd.Parameters.AddWithValue("nom_producto", oProducto.nom_producto);
-                    cmd.Parameters.AddWithValue("precio", oProducto.precio);
-                    cmd.Parameters.AddWithValue("stock", oProducto.stock);
-                    cmd.Parameters.AddWithValue("link_imagen", oProducto.link_imagen);
+                    SqlCommand cmd = new SqlCommand("CrearPromocionesProducto", connection);
+                    cmd.Parameters.AddWithValue("productoID", oProductoPromocion.productoID);
+                    cmd.Parameters.AddWithValue("promocionID", oProductoPromocion.promocionID);
+                    cmd.Parameters.AddWithValue("fecha_inicio", oProductoPromocion.fecha_inicio);
+                    cmd.Parameters.AddWithValue("fecha_fin", oProductoPromocion.fecha_fin);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
 
@@ -101,7 +98,7 @@ namespace CRUD1.Data
             return result;
         }
 
-        public bool Editar(ModelProducto oProducto)
+        public bool Editar(ModelProductoPromocion oProductoPromocion)
         {
             bool result;
 
@@ -111,13 +108,11 @@ namespace CRUD1.Data
                 using (var connection = new SqlConnection(cn.GetSQLInfo()))
                 {
                     connection.Open();
-                    SqlCommand cmd = new SqlCommand("EditarProducto", connection);
-                    cmd.Parameters.AddWithValue("productoID", oProducto.productoID);
-                    cmd.Parameters.AddWithValue("proveedorID", oProducto.proveedorID);
-                    cmd.Parameters.AddWithValue("nom_producto", oProducto.nom_producto);
-                    cmd.Parameters.AddWithValue("precio", oProducto.precio);
-                    cmd.Parameters.AddWithValue("stock", oProducto.stock);
-                    cmd.Parameters.AddWithValue("link_imagen", oProducto.link_imagen);
+                    SqlCommand cmd = new SqlCommand("EditarPromocionesProducto", connection);
+                    cmd.Parameters.AddWithValue("productoID", oProductoPromocion.productoID);
+                    cmd.Parameters.AddWithValue("promocionID", oProductoPromocion.promocionID);
+                    cmd.Parameters.AddWithValue("fecha_inicio", oProductoPromocion.fecha_inicio);
+                    cmd.Parameters.AddWithValue("fecha_fin", oProductoPromocion.fecha_fin);
 
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
@@ -133,7 +128,7 @@ namespace CRUD1.Data
             return result;
         }
 
-        public bool Eliminar(int id)
+        public bool Eliminar(int producto_id, int promocion_id)
         {
             bool result;
 
@@ -145,8 +140,9 @@ namespace CRUD1.Data
                 using (var connection = new SqlConnection(cn.GetSQLInfo()))
                 {
                     connection.Open();
-                    SqlCommand cmd = new SqlCommand("EliminarProducto", connection);
-                    cmd.Parameters.AddWithValue("productoID", id);
+                    SqlCommand cmd = new SqlCommand("EliminarPromocionesProducto", connection);
+                    cmd.Parameters.AddWithValue("productoID", producto_id);
+                    cmd.Parameters.AddWithValue("promocionID", promocion_id);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }

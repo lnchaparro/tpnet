@@ -44,7 +44,7 @@ namespace CRUD1
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Proveedor}/{action=Listar}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

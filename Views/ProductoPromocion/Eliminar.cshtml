@@ -1,0 +1,44 @@
+﻿@model CRUD1.Models.ModelProductoPromocion
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h1>Eliminar Producto en Promocion</h1>
+
+<h3>Desea eliminar esta promocion para este producto?</h3>
+<div>
+    <h4>ModelProductoPromocion</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.productoID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.productoID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.promocionID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.promocionID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.fecha_inicio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fecha_inicio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.fecha_fin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fecha_fin)
+        </dd>
+    </dl>
+    
+    <form asp-action="Eliminar" asp-controller="ProductoPromocion" method="post">
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Listar">Volver al listado</a>
+    </form>
+</div>

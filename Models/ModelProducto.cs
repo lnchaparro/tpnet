@@ -11,5 +11,11 @@
         
         public int stock { get; set; }
 
+        public string? link_imagen { get; set; }
+
+        public bool onSale { get; set; }
+
+        public decimal precio_promo { get; set; }
+
     }
 }

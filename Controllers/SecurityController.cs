@@ -16,7 +16,52 @@ namespace CRUD1.Controllers
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.signInManager = signInManager;
+
+            createAdminRoleAndAccount();
+            createEmployeeRole();
         }
+        
+        private void createAdminRoleAndAccount()
+        {
+
+            if (!roleManager.RoleExistsAsync("admin").Result)
+            {
+                AppIdentityRole role = new AppIdentityRole();
+                role.Name = "admin";
+                role.Description = "Puede realizar operaciones CRUD.";
+                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
+            }
+
+            AppIdentityUser user = new AppIdentityUser();
+            user.UserName = "admin";
+            user.Email = "admin@admins.com";
+            user.FullName = "admin";
+            user.BirthDate = DateTime.Now;
+
+            IdentityResult result = userManager.CreateAsync(user, "Contra!99").Result;
+
+            if (result.Succeeded)
+            {
+                userManager.AddToRoleAsync(user, "admin").Wait();
+            }
+            else
+            {
+                ModelState.AddModelError("", "Los datos de admin son invalidos.");
+            }
+        }
+
+        private void createEmployeeRole()
+        {
+
+            if (!roleManager.RoleExistsAsync("employee").Result)
+            {
+                AppIdentityRole role = new AppIdentityRole();
+                role.Name = "employee";
+                role.Description = "Puede realizar operaciones CRUD.";
+                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
+            }
+        }
+
 
         public IActionResult Register()
         {
@@ -33,11 +78,11 @@ namespace CRUD1.Controllers
 
             if (ModelState.IsValid)
             {
-                if (!roleManager.RoleExistsAsync("admin").Result)
+                if (!roleManager.RoleExistsAsync("client").Result)
                 {
                     AppIdentityRole role = new AppIdentityRole();
-                    role.Name = "admin";
-                    role.Description = "Puede realizar operaciones CRUD.";
+                    role.Name = "client";
+                    role.Description = "Puede comprar en la tienda.";
                     IdentityResult roleResult = roleManager.CreateAsync(role).Result;
                 }
 
@@ -51,7 +96,7 @@ namespace CRUD1.Controllers
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, "admin").Wait();
+                    userManager.AddToRoleAsync(user, "client").Wait();
                     return RedirectToAction("SignIn", "Security");
                 }
                 else
@@ -76,7 +121,7 @@ namespace CRUD1.Controllers
                 var result = signInManager.PasswordSignInAsync(obj.UserName, obj.Password, obj.RememberMe, false).Result;
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Listar", "Clientes");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -88,10 +133,11 @@ namespace CRUD1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SignOut()
+        public IActionResult SignOutSimple()
         {
             signInManager.SignOutAsync().Wait();
-            return RedirectToAction("SignIn", "Security");
+            Console.WriteLine("yes");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult AccessDenied()

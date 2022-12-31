@@ -7,13 +7,13 @@ using System.Data;
 namespace CRUD1.Controllers
 {
 
-    public class ProductoController : Controller
+    public class ProductoPromocionController : Controller
     {
-        ProductoData ProductoData = new ProductoData();
+        ProductoPromocionData ProductoPromocionData = new ProductoPromocionData();
 
         public IActionResult Listar()
         {
-            var oLista = ProductoData.Listar();
+            var oLista = ProductoPromocionData.Listar();
             return View(oLista);
         }
 
@@ -23,9 +23,9 @@ namespace CRUD1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Crear(ModelProducto oProducto)
+        public IActionResult Crear(ModelProductoPromocion oProductoPromocion)
         {
-            var respuesta = ProductoData.Crear(oProducto);
+            var respuesta = ProductoPromocionData.Crear(oProductoPromocion);
 
             if (respuesta)
             {
@@ -37,15 +37,15 @@ namespace CRUD1.Controllers
             }
         }
 
-        public IActionResult Editar(int id)
+        public IActionResult Editar(int producto_id, int promocion_id)
         {
-            var oProducto = ProductoData.Obtener(id);
+            var oProductoPromocion = ProductoPromocionData.Obtener(producto_id, promocion_id);
 
-            return View(oProducto);
+            return View(oProductoPromocion);
         }
 
         [HttpPost]
-        public IActionResult Editar(ModelProducto oProducto)
+        public IActionResult Editar(ModelProductoPromocion oProductoPromocion)
         {
 
             if (!ModelState.IsValid)
@@ -53,7 +53,7 @@ namespace CRUD1.Controllers
                 return View();
             }
 
-            var respuesta = ProductoData.Editar(oProducto);
+            var respuesta = ProductoPromocionData.Editar(oProductoPromocion);
 
             if (respuesta)
             {
@@ -65,17 +65,17 @@ namespace CRUD1.Controllers
             }
         }
 
-        public IActionResult Eliminar(int id)
+        public IActionResult Eliminar(int producto_id, int promocion_id)
         {
-            var oProducto = ProductoData.Obtener(id);
+            var oProductoPromocion = ProductoPromocionData.Obtener(producto_id, promocion_id);
 
-            return View(oProducto);
+            return View(oProductoPromocion);
         }
 
         [HttpPost]
-        public IActionResult Eliminar(ModelProducto oProducto)
+        public IActionResult Eliminar(ModelProductoPromocion oProductoPromocion)
         {
-            var respuesta = ProductoData.Eliminar(oProducto.productoID);
+            var respuesta = ProductoPromocionData.Eliminar(oProductoPromocion.productoID, oProductoPromocion.promocionID);
 
             if (respuesta)
             {
