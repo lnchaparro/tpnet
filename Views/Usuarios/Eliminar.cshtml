@@ -2,42 +2,23 @@
 
 @{
     ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Eliminar</h1>
-<h3>Desea elminar al usuario?</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_usuario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_usuario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.contraseña)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.contraseña)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.id_perfil)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.id_perfil)
-        </dd>
-    </dl>
-    
-    <form asp-action="Eliminar" asp-controller="Usuarios" method="post">
-        <input asp-for="id_usuario" type="hidden" class="form-control" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Listar">Regresar al listado</a>
-    </form>
+<div class="card">
+    <div class="card-header">
+        Eliminar Usuario
+    </div>
+    <div class="card-body">
+        <form asp-action="Eliminar" asp-controller="Usuarios" method="post">
+            <input asp-for="email" type="hidden" class="form-control" />
+
+            <div class="alert alert-danger" role="alert">
+                ¿Desea eliminar el Usuario "@Html.DisplayFor(model => model.email)"?
+            </div>
+
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a asp-action="Listar" asp-controller="Usuarios" class="btn btn-warning">Volver al listado</a>
+        </form>
+    </div>
 </div>
