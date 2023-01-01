@@ -10,14 +10,13 @@
         Eliminar Producto
     </div>
     <div class="card-body">
-        <form asp-action="Eliminar" asp-controller="Clientes" method="post">
-            <input asp-for="productoID" type="hidden" class="form-control" />
-
             <div class="alert alert-danger" role="alert">
                 ¿Desea eliminar el Producto "@Html.DisplayFor(model => model.productoID)"?
             </div>
-
-            <button type="submit" class="btn btn-danger">Eliminar</button>
+        <form asp-action="Eliminar" asp-controller="Producto" method="post">
+            <input asp-for="productoID" type="hidden" class="form-control" />
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            
             <a asp-action="Listar" asp-controller="Producto" class="btn btn-warning">Volver al listado</a>
         </form>
     </div>

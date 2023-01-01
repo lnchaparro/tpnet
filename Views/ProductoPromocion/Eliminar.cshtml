@@ -38,6 +38,7 @@
     </dl>
     
     <form asp-action="Eliminar" asp-controller="ProductoPromocion" method="post">
+        <input asp-for="productoID" type="hidden" class="form-control" />
         <input type="submit" value="Eliminar" class="btn btn-danger" /> |
         <a asp-action="Listar">Volver al listado</a>
     </form>

@@ -81,13 +81,18 @@
 @:                            <div class="text-center">
 @:                                <!-- Product name-->
 @:                                <h5 class="fw-bolder">@item.nom_producto</h5>
-@:                                <h6>(Quedan @item.stock!)</h6>
+
 @:                                <!-- Product price-->
                                     @if (item.onSale)
                     {
                         @:<span class="text-muted text-decoration-line-through">@item.precio</span>
+                        @:                                $@item.precio_promo
                     }
-                    @:                                $@item.precio_promo
+                    else
+                    {
+                        @:                                $@item.precio
+                    }
+
 @:                            </div>
 @:                        </div>
 @:                        <!-- Product actions-->
