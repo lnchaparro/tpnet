@@ -2,57 +2,54 @@
 
 @{
     ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Listar</h1>
+<div class="card">
+    <div class="card-header">
+        Empleados
+    </div>
 
-<p>
-    <a asp-action="Crear">Crear Nuevo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.empleadosID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre_emp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.apellido_emp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.rol_area)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.id_usuario)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.empleadosID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre_emp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.apellido_emp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.rol_area)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.id_usuario)
-            </td>
-            <td>
-                    @Html.ActionLink("Editar", "Editar", new { id=item.empleadosID }) |
-                    @Html.ActionLink("Eliminar", "Eliminar", new { id=item.empleadosID })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card-body"></div>
+    <a asp-action="Crear" asp-controller="Empleados" class="btn btn-success">Crear Nuevo</a>
+    <hr />
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID </th>
+                <th scope="col">Nombre Empleado</th>
+                <th scope="col">Apellido Empleado</th>
+                <th scope="col">Rol/Area</th>
+                <th scope="col">ID Usuario</th>
+                <th scope="col">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                            @item.empleadosID
+                    </td>
+                    <td>
+                            @item.nombre_emp
+                    </td>
+                    <td>
+                            @item.apellido_emp
+                    </td>
+                    <td>
+                            @item.rol_area
+                    </td>
+                    <td>
+                            @item.id_usuario
+                    </td>        
+                    <td>
+                        <a asp-action="Editar" asp-controller="Empleados" class="btn btn-success" asp-route-id="@item.empleadosID">Editar</a>
+                        <a asp-action="Eliminar" asp-controller="Empleados" class="btn btn-danger" asp-route-id="@item.empleadosID">Eliminar</a>
+                    </td>
+                </tr>
+                }
+        </tbody>
+    </table>
+</div>

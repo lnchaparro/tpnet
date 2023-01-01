@@ -2,34 +2,36 @@
 
 @{
     ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Editar Promocion</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card">
+    <div class="card-header">
+        Editar Promocion
+    </div>
+    <div class="card-body">
+
         <form asp-action="Editar" asp-controller="Promocion" method="post">
             <input asp-for="promocionID" type="hidden" class="form-control" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="descuento" class="control-label"></label>
+
+            <div class="mb-3">
+                <label for="descuento" class="form-label">Cliente ID</label>
                 <input asp-for="descuento" class="form-control" />
                 <span asp-validation-for="descuento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="nom_promo" class="control-label"></label>
+            <div class="mb-3">
+                <label for="nom_promo" class="form-label">Nombre</label>
                 <input asp-for="nom_promo" class="form-control" />
                 <span asp-validation-for="nom_promo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+           
+            <button type="submit" class="btn btn-primary">Guardar</button>
 
-<div>
-    <a asp-action="Listar">Volver al listado</a>
+            <a asp-action="Listar" asp-controller="Promocion" class="btn btn-success">Volver al listado</a>
+        </form>
+
+
+    </div>
 </div>
 
 @section Scripts {

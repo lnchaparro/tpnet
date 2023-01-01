@@ -2,37 +2,23 @@
 
 @{
     ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Eliminar Promocion</h1>
+<div class="card">
+    <div class="card-header">
+        Eliminar Promocion
+    </div>
+    <div class="card-body">
+        <form asp-action="Eliminar" asp-controller="Clientes" method="post">
+            <input asp-for="promocionID" type="hidden" class="form-control" />
 
-<h3>Desea eliminar la promocion y todos sus datos?</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.promocionID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.promocionID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.descuento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.descuento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nom_promo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nom_promo)
-        </dd>
-    </dl>
-    
-    <form asp-action="Eliminar" asp-controller="Promocion" method="post">
-        <input asp-for="promocionID" type="hidden" class="form-control" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+            <div class="alert alert-danger" role="alert">
+                ¿Desea eliminar la Promocion "@Html.DisplayFor(model => model.nom_promo)"?
+            </div>
+
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a asp-action="Listar" asp-controller="Promocion" class="btn btn-warning">Volver al listado</a>
+        </form>
+    </div>
 </div>

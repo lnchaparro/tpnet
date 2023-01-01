@@ -2,44 +2,45 @@
 
 @{
     ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Promociones</h1>
-<p>
-    <a asp-action="Crear">Crear Nueva</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.promocionID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.descuento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nom_promo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.promocionID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descuento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nom_promo)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Editar", new { id=item.promocionID }) |
-                @Html.ActionLink("Eliminar", "Eliminar", new { id=item.promocionID })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="card">
+    <div class="card-header">
+        Promociones
+    </div>
+
+    <div class="card-body"></div>
+    <a asp-action="Crear" asp-controller="Promocion" class="btn btn-success">Crear Nueva</a>
+    <hr />
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID </th>
+                <th scope="col">Descuento</th>
+                <th scope="col">Nombre Promo</th>
+                <th scope="col">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                            @item.promocionID
+                    <td>
+                                @item.descuento
+                    </td>
+                    <td>
+                                @item.nom_promo
+                    </td>               
+                    <td>
+                        <a asp-action="Editar" asp-controller="Promocion" class="btn btn-success" asp-route-id="@item.promocionID">Editar</a>
+                        <a asp-action="Eliminar" asp-controller="Promocion" class="btn btn-danger" asp-route-id="@item.promocionID">Eliminar</a>
+                    </td>
+                </tr>
+                }
+        </tbody>
+    </table>
+</div>

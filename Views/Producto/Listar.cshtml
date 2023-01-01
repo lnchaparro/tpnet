@@ -2,63 +2,62 @@
 
 @{
     ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Productos</h1>
+<div class="card">
+    <div class="card-header">
+        Productos
+    </div>
 
-<p>
-    <a asp-action="Crear">Crear Nuevo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.productoID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.proveedorID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nom_producto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.precio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.link_imagen)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.productoID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.proveedorID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nom_producto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.stock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.link_imagen)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Editar", new { id=item.productoID }) |
-                @Html.ActionLink("Eliminar", "Eliminar", new { id=item.productoID })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card-body"></div>
+    <a asp-action="Crear" asp-controller="Producto" class="btn btn-success">Crear Nuevo</a>
+    <hr />
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID Producto</th>
+                <th scope="col">ID Proveedor</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Link Imagen</th>          
+                <th scope="col">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                            @item.productoID
+                    </td>
+                    <td>
+                            @item.proveedorID
+                    </td>
+                    <td>
+                            @item.nom_producto
+                    </td>
+                    <td>
+                            @item.precio
+                    </td>
+                    <td>
+                            @item.stock
+                    </td>
+                    <td>
+                            @item.link_imagen
+                    </td>
+                 
+                    <td>
+                        <a asp-action="Editar" asp-controller="Producto" class="btn btn-success" asp-route-id="@item.productoID">Editar</a>
+                        <a asp-action="Eliminar" asp-controller="Producto" class="btn btn-danger" asp-route-id="@item.productoID">Eliminar</a>
+                    </td>
+                </tr>
+                }
+        </tbody>
+    </table>
+</div>
+
+
+
